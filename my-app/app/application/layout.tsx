@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useForm, FormProvider } from "react-hook-form";
 import { StepIndicator } from "@/components/ui/StepIndicator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { applicantSchema } from "@/lib/schemas/formSchema";
+import { masterSchema } from "@/lib/schemas/formSchema";
 
 // step titles of the application process
 const STEPS = [
@@ -40,7 +40,7 @@ export default function ApplicationLayout({
 
   // initialize React-Hook-Form
   const methods = useForm({
-    resolver: zodResolver(applicantSchema),
+    resolver: zodResolver(masterSchema),
     mode: "onChange",
     defaultValues: {
       fullName: "",

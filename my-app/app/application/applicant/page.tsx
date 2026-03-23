@@ -6,9 +6,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { z } from "zod";
-import { applicantSchema } from "@/lib/schemas/formSchema";
-
-type ApplicantData = z.infer<typeof applicantSchema>;
+import { MasterData } from "@/lib/schemas/formSchema";
 
 export default function ApplicantStep() {
   const router = useRouter();
@@ -16,10 +14,9 @@ export default function ApplicantStep() {
   // access the shared context
   const {
     register,
-    handleSubmit,
     trigger,
     formState: { errors },
-  } = useFormContext<ApplicantData>();
+  } = useFormContext<MasterData>();
 
   // handle navigation to the next step
   const onNext = async () => {
