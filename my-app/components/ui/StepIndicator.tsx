@@ -4,7 +4,7 @@ interface StepIndicatorProps {
 }
 
 export const StepIndicator = ({ steps, currentStep }: StepIndicatorProps) => (
-  <nav className="flex items-center justify-between mb-8 w-full">
+  <nav className="flex mb-8 max-w-2xl justify-items-center mx-auto">
     {steps.map((step, index) => (
       <div key={step} className="flex flex-col items-center flex-1">
         <div
