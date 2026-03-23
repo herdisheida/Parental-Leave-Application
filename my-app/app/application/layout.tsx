@@ -43,11 +43,31 @@ export default function ApplicationLayout({
     resolver: zodResolver(masterSchema),
     mode: "onChange",
     defaultValues: {
+      // step 1: applicant
       fullName: "",
       kennitala: "",
       address: "",
       email: "",
       phone: "",
+      // step 2: employment
+      employmentType: "Unemployed",
+      employerName: "",
+      employmentRatio: undefined,
+      companyName: "",
+      // step 3: partner
+      hasPartner: false,
+      partnerFullName: "",
+      partnerKennitala: "",
+      partnerEmploymentStatus: "",
+      // step 4: leave
+      leaveStart: "",
+      leaveEnd: "",
+      // step 5: payment
+      bankNumber: "",
+      ledger: "",
+      accountNumber: "",
+      // step 6: documents
+      files: [],
     },
   });
 
