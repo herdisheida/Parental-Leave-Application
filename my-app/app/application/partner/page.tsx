@@ -1,9 +1,5 @@
 // app/application/partner/page.tsx
 
-export default function PartnerPage() {
-  return (
-    <div>
-      Partner page
-    </div>
-  );
+export default function Partner() {
+  return <div>Partner page</div>;
 }
