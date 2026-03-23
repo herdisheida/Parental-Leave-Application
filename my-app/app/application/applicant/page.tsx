@@ -6,17 +6,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
-
-// validation schema for applicant
-const applicantSchema = z.object({
-  fullName: z.string().min(1, "Full name is required"),
-  kennitala: z.string().regex(/^\d{10}$/, "Kennitala must be 10 digits"),
-  address: z.string().min(1, "Address is required"),
-  email: z.string().min(4, "Email is required").email("Email is invalid"),
-  phone: z.string().regex(/^\d{7}$/, "Phone number must be 7 digits"),
-});
+import { applicantSchema } from "@/lib/schemas/formSchema";
 
 type ApplicantData = z.infer<typeof applicantSchema>;
 
@@ -40,6 +30,7 @@ export default function ApplicantStep() {
       "email",
       "phone",
     ]);
+
     if (isValid) router.push("/application/employment");
   };
 
