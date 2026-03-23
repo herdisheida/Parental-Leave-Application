@@ -26,7 +26,7 @@ export default function EmploymentStep() {
   // handle navigation to the next step
   const onNext = async () => {
     // Define which fields to validate based on selection
-    const fieldsToValidate = ["employmentType"];
+    const fieldsToValidate: (keyof MasterData)[] = ["employmentType"];
 
     if (employmentType === "Employed") {
       fieldsToValidate.push("employerName", "employmentRatio");
