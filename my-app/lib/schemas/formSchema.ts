@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 // Step 1 : Applicant
 export const applicantSchema = z.object({
@@ -14,9 +13,9 @@ export const applicantSchema = z.object({
 export const employmentSchema = z
   .object({
     employmentType: z.enum(["Employed", "Self-employed", "Unemployed"]),
-    employerName: z.string().optional(),
+    employerName: z.string().min(1, "Employer name is required").optional(),
     employmentRatio: z.coerce.number().min(1).max(100).optional(),
-    companyName: z.string().optional(),
+    companyName: z.string().min(1, "Company name is required").optional(),
   })
   .refine(
     (data) => {
@@ -32,12 +31,18 @@ export const employmentSchema = z
 export const partnerSchema = z
   .object({
     hasPartner: z.boolean(),
-    partnerFullName: z.string().optional(),
+    partnerFullName: z
+      .string()
+      .min(1, "Partner's full name is required")
+      .optional(),
     partnerKennitala: z
       .string()
       .regex(/^\d{10}$/, "Kennitala must be 10 digits")
       .optional(),
-    partnerEmploymentStatus: z.string().optional(),
+    partnerEmploymentStatus: z
+      .string()
+      .min(1, "Partner's employment status is required")
+      .optional(),
   })
   .refine(
     (data) => {

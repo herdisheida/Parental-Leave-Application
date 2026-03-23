@@ -1,12 +1,11 @@
 // app/application/applicant/page.tsx
 "use client";
 
+import { MasterData } from "@/lib/schemas/formSchema";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
-import { z } from "zod";
-import { MasterData } from "@/lib/schemas/formSchema";
 
 export default function ApplicantStep() {
   const router = useRouter();
@@ -45,20 +44,20 @@ export default function ApplicantStep() {
         <Input
           label="Full Name"
           {...register("fullName")}
-          error={errors.fullName?.message}
+          error={errors.fullName?.message as string}
           placeholder="Peter Parker"
         />
         <Input
           label="Kennitala"
           {...register("kennitala")}
-          error={errors.kennitala?.message}
+          error={errors.kennitala?.message as string}
           placeholder="0000000000"
         />
         <div className="md:col-span-2">
           <Input
             label="Address"
             {...register("address")}
-            error={errors.address?.message}
+            error={errors.address?.message as string}
             placeholder="Laugavegur 1"
           />
         </div>
@@ -66,13 +65,13 @@ export default function ApplicantStep() {
           label="Email"
           type="email"
           {...register("email")}
-          error={errors.email?.message}
+          error={errors.email?.message as string}
           placeholder="peter@parker.is"
         />
         <Input
           label="Phone Number"
           {...register("phone")}
-          error={errors.phone?.message}
+          error={errors.phone?.message as string}
           placeholder="1234567"
         />
       </div>
