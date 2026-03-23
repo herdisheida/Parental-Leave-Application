@@ -11,7 +11,6 @@
 
 |            | go to directory | install dependencies | run           |
 | ---------- | --------------- | -------------------- | ------------- |
-| run server | `cd server`     | `npm install`        | `npm start`   |
 | run app    | `cd my-app`     | `npm install`        | `npm run dev` |
 
 2. Open the app in your browser
