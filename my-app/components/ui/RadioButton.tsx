@@ -7,12 +7,21 @@ interface RadioProps {
   error?: string;
 }
 
-export const RadioButton = ({ label, options, value, onChange, error }: RadioProps) => (
+export const RadioButton = ({
+  label,
+  options,
+  value,
+  onChange,
+  error,
+}: RadioProps) => (
   <div className="flex flex-col gap-2">
     <span className="text-sm font-semibold text-gray-700">{label}</span>
     <div className="flex gap-4">
       {options.map((opt) => (
-        <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
+        <label
+          key={opt.value}
+          className="flex items-center gap-2 cursor-pointer"
+        >
           <input
             type="radio"
             checked={value === opt.value}

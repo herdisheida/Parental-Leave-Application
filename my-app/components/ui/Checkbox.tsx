@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+import { InputHTMLAttributes, forwardRef } from "react";
 
 interface CheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -15,7 +15,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             ref={ref}
             className={`peer h-5 w-5 cursor-pointer appearance-none rounded border 
               transition-all checked:bg-blue-600 checked:border-blue-600 
-              ${error ? 'border-red-500' : 'border-gray-300 hover:border-blue-400'}`}
+              ${error ? "border-red-500" : "border-gray-300 hover:border-blue-400"}`}
             {...props}
           />
           {/* Checkmark Icon */}
@@ -38,7 +38,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       </label>
       {error && <span className="text-xs text-red-500 ml-8">{error}</span>}
     </div>
-  )
+  ),
 );
 
 Checkbox.displayName = "Checkbox";

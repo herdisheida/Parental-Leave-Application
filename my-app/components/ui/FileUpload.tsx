@@ -1,4 +1,4 @@
-import { forwardRef, ChangeEvent, useState } from 'react';
+import { forwardRef, ChangeEvent, useState } from "react";
 
 interface FileProps {
   label: string;
@@ -13,7 +13,7 @@ export const FileUpload = forwardRef<HTMLInputElement, FileProps>(
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
-        setFileNames(Array.from(e.target.files).map(f => f.name));
+        setFileNames(Array.from(e.target.files).map((f) => f.name));
       }
     };
 
@@ -29,16 +29,19 @@ export const FileUpload = forwardRef<HTMLInputElement, FileProps>(
             id="file-upload"
             {...props}
           />
-          <label htmlFor="file-upload" className="cursor-pointer text-blue-600 font-medium">
+          <label
+            htmlFor="file-upload"
+            className="cursor-pointer text-blue-600 font-medium"
+          >
             Click to upload files
           </label>
           <div className="mt-2 text-xs text-gray-500">
-            {fileNames.length > 0 ? fileNames.join(', ') : "No files selected"}
+            {fileNames.length > 0 ? fileNames.join(", ") : "No files selected"}
           </div>
         </div>
         {error && <span className="text-xs text-red-500">{error}</span>}
       </div>
     );
-  }
+  },
 );
 FileUpload.displayName = "FileUpload";
