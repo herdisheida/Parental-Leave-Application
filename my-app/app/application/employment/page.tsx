@@ -69,7 +69,7 @@ export default function EmploymentStep() {
 
       {/* if "Employed"  */}
       {employmentType === "Employed" && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 bg-gray-50 rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-4 rounded-lg">
           <Input
             label="Employer Name"
             {...register("employerName")}
@@ -88,7 +88,7 @@ export default function EmploymentStep() {
 
       {/* if "Self-employed"  */}
       {employmentType === "Self-employed" && (
-        <div className="p-4 bg-gray-50 rounded-lg">
+        <div className="p-4 rounded-lg">
           <Input
             label="Company Name"
             {...register("companyName")}
