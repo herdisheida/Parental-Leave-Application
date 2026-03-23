@@ -39,10 +39,11 @@ export const partnerSchema = z
       .string()
       .regex(/^\d{10}$/, "Kennitala must be 10 digits")
       .optional(),
-    partnerEmploymentStatus: z
-      .string()
-      .min(1, "Partner's employment status is required")
-      .optional(),
+    partnerEmploymentStatus: z.enum([
+      "Employed",
+      "Self-employed",
+      "Unemployed",
+    ]),
   })
   .refine(
     (data) => {

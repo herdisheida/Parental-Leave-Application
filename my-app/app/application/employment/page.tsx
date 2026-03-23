@@ -35,9 +35,7 @@ export default function EmploymentStep() {
     }
 
     const isValid = await trigger(fieldsToValidate);
-    if (isValid) {
-      router.push("/application/partner");
-    }
+    if (isValid) router.push("/application/partner");
   };
 
   return (
