@@ -146,12 +146,11 @@ export const paymentSchema = z.object({
 // Step 6: Documents
 export const documentsSchema = z.object({
   files: z
-    // handle both FileList and array of Files for type safety
+    // handle FileList and convert to array for validation
     .preprocess(
       (val) => (val instanceof FileList ? Array.from(val) : val),
       z.array(z.instanceof(File)),
     )
-    .transform((val) => (val instanceof FileList ? Array.from(val) : val)) // ensure files is always an array
     .refine((files) => files.length > 0, "At least one document is required")
     .refine(
       (files) => files.every((file) => file.size <= 25 * 1024 * 1024),
