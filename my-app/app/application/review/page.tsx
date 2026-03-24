@@ -130,7 +130,7 @@ export default function ReviewStep() {
         <div className="text-sm space-y-1">
           <h3 className="font-bold text-gray-900">Payment Information</h3>
           <p className="text-sm">
-            Bank: {values.bankNumber} | Ledger: {values.ledger} | Account:{" "}
+            Bank details: {values.bankNumber} - {values.ledger} -{" "}
             {values.accountNumber}
           </p>
         </div>
