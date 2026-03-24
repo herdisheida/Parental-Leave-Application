@@ -146,9 +146,13 @@ export default function ReviewStep() {
         <div className="text-sm space-y-1">
           <h3 className="font-bold text-gray-900">Documents</h3>
           <ul className="list-disc list-inside text-sm">
-            {values.files.map((file, index) => (
-              <li key={index}>{file.name}</li>
-            ))}
+            {values.files.length > 0 ? (
+              values.files.map((file, index) => (
+                <li key={index}>{file.name}</li>
+              ))
+            ) : (
+              <p>No documents uploaded</p>
+            )}
           </ul>
         </div>
         <Button
@@ -159,9 +163,13 @@ export default function ReviewStep() {
         </Button>
       </section>
 
-      <div className="flex flex-col gap-4 pt-10 border-t">
-        <Button onClick={onSubmit} disabled={isSubmitting}>
-          {isSubmitting ? "Processing Submission..." : "Submit Application"}
+      <div className="pt-6 border-t">
+        <Button
+          className="w-full h-12 text-lg"
+          onClick={onSubmit}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? "Submitting Application..." : "Submit Application"}
         </Button>
       </div>
     </div>
