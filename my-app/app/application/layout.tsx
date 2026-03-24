@@ -65,8 +65,8 @@ export default function ApplicationLayout({
       partnerKennitala: "",
       partnerEmploymentStatus: EmploymentType.Unemployed,
       // step 4: leave
-      startDate: undefined,
-      endDate: undefined,
+      startDate: new Date(),
+      endDate: new Date(),
       leaveRatio: LeaveRatio["100%"],
       // step 5: payment
       bankNumber: "",
