@@ -64,14 +64,6 @@ export default function ReviewStep() {
         <Button onClick={onSubmit} disabled={isSubmitting}>
           {isSubmitting ? "Processing Submission..." : "Submit Application"}
         </Button>
-
-        <Button
-          variant="secondary"
-          onClick={() => router.back()}
-          disabled={isSubmitting}
-        >
-          Back to Documents
-        </Button>
       </div>
     </div>
   );
