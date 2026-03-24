@@ -26,8 +26,7 @@ export default function DocumentsStep() {
         <h2 className="text-xl font-bold">Step 6: Documents</h2>
         <p className="text-sm text-gray-500">
           Upload your supporting documents.
-        </p>{" "}
-        [cite: 85]
+        </p>
       </div>
 
       <FileUpload
