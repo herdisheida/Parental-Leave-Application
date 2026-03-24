@@ -35,7 +35,7 @@ export default function LeaveStep() {
           message: issue.message,
         });
       });
-      return; // stop navigation
+      return;
     }
 
     // also trigger masterSchema to keep React-Hook-Form in sync
