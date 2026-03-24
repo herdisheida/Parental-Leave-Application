@@ -13,7 +13,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-8 text-center my-6">
+    <div className="flex flex-col items-center justify-center min-h-[80vh] space-y-8 text-center my-6">
       <div className="space-y-4">
         <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 pb-2">
           Parental Leave Application
@@ -41,12 +41,14 @@ export default function Home() {
         Start New Application
       </Button>
 
-      <p className="text-xs text-gray-400">
-        Stafrænt Ísland &copy; 2026. All rights reserved.
-      </p>
-      <p className="text-xs text-gray-400">
-        This is a demo application for educational purposes.
-      </p>
+      <footer className="mt-12 text-center space-y-2">
+        <p className="text-xs text-gray-400">
+          Stafrænt Ísland &copy; 2026. All rights reserved.
+        </p>
+        <p className="text-xs text-gray-400">
+          This is a demo application for educational purposes.
+        </p>
+      </footer>
     </div>
   );
 }
