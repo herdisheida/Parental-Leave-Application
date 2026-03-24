@@ -3,10 +3,10 @@
 
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm, FormProvider, type Resolver } from "react-hook-form";
 import { StepIndicator } from "@/components/ui/StepIndicator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { masterSchema } from "@/lib/schemas/formSchema";
+import { masterSchema, type MasterData } from "@/lib/schemas/formSchema";
 
 // step titles of the application process
 const STEPS = [
@@ -39,8 +39,8 @@ export default function ApplicationLayout({
   const pathname = usePathname();
 
   // initialize React-Hook-Form
-  const methods = useForm({
-    resolver: zodResolver(masterSchema),
+  const methods = useForm<MasterData>({
+    resolver: zodResolver(masterSchema) as Resolver<MasterData>,
     mode: "onChange",
     defaultValues: {
       // step 1: applicant

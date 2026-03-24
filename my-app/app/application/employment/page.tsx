@@ -1,7 +1,7 @@
 // app/application/employment/page.tsx
 "use client";
 
-import { MasterData } from "@/lib/schemas/formSchema";
+import { type MasterData } from "@/lib/schemas/formSchema";
 import { useFormContext, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { RadioButton } from "@/components/ui/RadioButton";

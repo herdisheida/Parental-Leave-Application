@@ -1,7 +1,7 @@
 // app/application/applicant/page.tsx
 "use client";
 
-import { MasterData } from "@/lib/schemas/formSchema";
+import { type MasterData } from "@/lib/schemas/formSchema";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/Input";
