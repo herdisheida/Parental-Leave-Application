@@ -58,10 +58,11 @@ export default function ApplicationLayout({
       hasPartner: false,
       partnerFullName: "",
       partnerKennitala: "",
-      partnerEmploymentStatus: "",
+      partnerEmploymentStatus: "Unemployed",
       // step 4: leave
-      leaveStart: "",
-      leaveEnd: "",
+      startDate: undefined,
+      endDate: undefined,
+      leaveRatio: undefined,
       // step 5: payment
       bankNumber: "",
       ledger: "",
