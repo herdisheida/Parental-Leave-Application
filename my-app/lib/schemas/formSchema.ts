@@ -64,10 +64,10 @@ export const partnerSchema = z
 // Step 4: Leave
 export const leaveSchema = z
   .object({
-    startDate: z.date({ required_error: "Start date is required" }),
-    endDate: z.date({ required_error: "End date is required" }),
+    startDate: z.date({ message: "Start date is required" }),
+    endDate: z.date({ message: "End date is required" }),
     leaveRatio: z.enum(["25%", "50%", "75%", "100%"], {
-      required_error: "Please select a leave ratio",
+      message: "Please select a leave ratio",
     }),
   })
   .refine((data) => data.endDate > data.startDate, {
