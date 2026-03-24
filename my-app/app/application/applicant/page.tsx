@@ -19,14 +19,15 @@ export default function ApplicantStep() {
 
   // handle navigation to the next step
   const onNext = async () => {
-    const isValid = await trigger([
+    const fieldsToValidate: (keyof MasterData)[] = [
       "fullName",
       "kennitala",
       "address",
       "email",
       "phone",
-    ]);
+    ];
 
+    const isValid = await trigger(fieldsToValidate);
     if (isValid) router.push("/application/employment");
   };
 
