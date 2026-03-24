@@ -2,10 +2,12 @@ import { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
+  size?: "small" | "medium" | "large";
 }
 
 export const Button = ({
   variant = "primary",
+  size = "medium",
   className,
   ...props
 }: ButtonProps) => {
@@ -16,10 +18,15 @@ export const Button = ({
     secondary:
       "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400",
   };
+  const sizes = {
+    small: "text-sm",
+    medium: "text-base",
+    large: "text-lg",
+  };
 
   return (
     <button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
       {...props}
     />
   );
