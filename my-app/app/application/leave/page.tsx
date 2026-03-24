@@ -24,6 +24,7 @@ export default function LeaveStep() {
       "leaveRatio",
     ];
 
+    // TODO -- for some reason i can go to the next step even when the endDate is invalid
     const isValid = await trigger(fieldsToValidate);
     if (isValid) router.push("/application/payment");
   };
