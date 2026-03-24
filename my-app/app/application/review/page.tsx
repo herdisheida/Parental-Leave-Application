@@ -76,3 +76,7 @@ export default function ReviewStep() {
     </div>
   );
 }
+
+// TODO
+// On failure, an error message should be displayed on the review page
+// without losing the form data
