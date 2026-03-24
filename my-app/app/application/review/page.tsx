@@ -22,7 +22,28 @@ export default function ReviewStep() {
     setError(null);
 
     try {
-      const result = await submitApplication(values);
+      const formData = new FormData();
+
+      // add all MasterData fields -> except files
+      Object.entries(values).forEach(([key, value]) => {
+        if (key !== "files" && value !== undefined && value !== null) {
+          // convert Dates or Booleans to str
+          if (value instanceof Date) {
+            formData.append(key, value.toISOString());
+          } else {
+            formData.append(key, String(value));
+          }
+        }
+      });
+
+      // add files seperatly
+      if (values.files) {
+        Array.from(values.files).forEach((file) => {
+          formData.append("files", file);
+        });
+      }
+
+      const result = await submitApplication(formData as FormData);
 
       if (result.success) {
         router.push(`/application/confirmation?id=${result.confirmationId}`);
@@ -51,7 +72,7 @@ export default function ReviewStep() {
       )}
 
       {/* Applicant Section */}
-      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg">
+      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg mt-4">
         <div className="text-sm space-y-1">
           <h3 className="font-bold text-gray-900">Applicant Information</h3>
           <p>

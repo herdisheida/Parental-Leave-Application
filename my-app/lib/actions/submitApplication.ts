@@ -7,14 +7,8 @@ export async function submitApplication(formData: FormData) {
     // simulate a processing (3 sec delay)
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const fullName = formData.get("fullName");
-    const files = formData.getAll("files"); // Gets all uploaded files
-
-    console.log(`Processing application for: ${fullName}`);
-    console.log(`Number of files: ${files.length}`);
-    //  TODO - delete when done testing
-    // mock random failure (for test)
-    // if (Math.random() > 0.9) throw new Error("Database connection failed");
+    // mock random failure  ( 10 % chance )
+    if (Math.random() > 0.9) throw new Error("Database connection failed");
 
     // return success with a GUID confirmation number
     return {
@@ -26,6 +20,7 @@ export async function submitApplication(formData: FormData) {
     return {
       success: false,
       message: "An error occurred while submitting. Please try again.",
+      error: error instanceof Error ? error.message : "Unknown error",
     };
   }
 }
