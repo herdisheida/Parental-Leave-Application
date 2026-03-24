@@ -38,29 +38,36 @@ export default function ReviewStep() {
         Review Your Application
       </h2>
 
-      {/* display info (read-only format)  */}
-      <section className="space-y-4">
-        <div>
-          <h3 className="font-semibold text-gray-700">Applicant</h3>
-          <p className="text-sm">
+      {error && (
+        <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-md">
+          {error}
+        </div>
+      )}
+
+      {/* Applicant Section */}
+      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg">
+        <div className="text-sm space-y-1">
+          <h3 className="font-bold text-gray-900">Applicant Information</h3>
+          <p>
             {values.fullName} ({values.kennitala})
           </p>
-          <p className="text-sm">
+          <p>
             {values.email} | {values.phone}
           </p>
+          <p>{values.address}</p>
         </div>
         <Button
           variant="secondary"
-          size="small"
           onClick={() => router.push("/application/applicant")}
         >
-          Edit Applicant Info
+          Edit
         </Button>
       </section>
 
-      <section className="space-y-4">
-        <div>
-          <h3 className="font-semibold text-gray-700">Employment</h3>
+      {/* Employment Section */}
+      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg">
+        <div className="text-sm space-y-1">
+          <h3 className="font-bold text-gray-900">Applicant Information</h3>
           <p className="text-sm">{values.employmentType}</p>
           {values.employmentType === EmploymentType.Employed && (
             <>
@@ -76,16 +83,16 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
-          size="small"
           onClick={() => router.push("/application/employment")}
         >
-          Edit Employment Info
+          Edit
         </Button>
       </section>
 
-      <section className="space-y-4">
-        <div>
-          <h3 className="font-semibold text-gray-700">Partner</h3>
+      {/* Partner Information Section */}
+      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg">
+        <div className="text-sm space-y-1">
+          <h3 className="font-bold text-gray-900">Partner Information</h3>
           <p className="text-sm">
             {values.hasPartner
               ? `${values.partnerFullName} (${values.partnerKennitala}) - ${values.partnerEmploymentStatus}`
@@ -94,34 +101,34 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
-          size="small"
           onClick={() => router.push("/application/partner")}
         >
-          Edit Partner Info
+          Edit
         </Button>
       </section>
 
-      <section className="space-y-4">
-        <div>
-          <h3 className="font-semibold text-gray-700">Leave Details</h3>
-          <p className="text-sm">
-            {new Date(values.startDate).toLocaleDateString()} to{" "}
-            {new Date(values.endDate).toLocaleDateString()} ({values.leaveRatio}
-            %)
+      {/* leave Details Section  */}
+      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg">
+        <div className="text-sm space-y-1">
+          <h3 className="font-bold text-gray-900">Leave Period</h3>
+          <p>
+            Dates: {values.startDate?.toLocaleDateString()} to{" "}
+            {values.endDate?.toLocaleDateString()}
           </p>
+          <p>Ratio: {values.leaveRatio}</p>
         </div>
         <Button
           variant="secondary"
-          size="small"
           onClick={() => router.push("/application/leave")}
         >
-          Edit Leave Details
+          Edit
         </Button>
       </section>
 
-      <section className="space-y-4">
-        <div>
-          <h3 className="font-semibold text-gray-700">Payment Info</h3>
+      {/* Payment Information Section */}
+      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg">
+        <div className="text-sm space-y-1">
+          <h3 className="font-bold text-gray-900">Payment Information</h3>
           <p className="text-sm">
             Bank: {values.bankNumber} | Ledger: {values.ledger} | Account:{" "}
             {values.accountNumber}
@@ -129,16 +136,15 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
-          size="small"
           onClick={() => router.push("/application/payment")}
         >
-          Edit Payment Info
+          Edit
         </Button>
       </section>
 
-      <section className="space-y-4">
-        <div>
-          <h3 className="font-semibold text-gray-700">Documents</h3>
+      <section className="flex justify-between items-start bg-gray-50 p-4 rounded-lg">
+        <div className="text-sm space-y-1">
+          <h3 className="font-bold text-gray-900">Documents</h3>
           <ul className="list-disc list-inside text-sm">
             {values.files.map((file, index) => (
               <li key={index}>{file.name}</li>
@@ -147,10 +153,9 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
-          size="small"
           onClick={() => router.push("/application/documents")}
         >
-          Edit Documents
+          Edit
         </Button>
       </section>
 
