@@ -2,7 +2,7 @@
 
 "use client";
 
-import { type MasterData } from "@/lib/schemas/formSchema";
+import { EmploymentType, type MasterData } from "@/lib/schemas/formSchema";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
@@ -16,12 +16,9 @@ export default function ReviewStep() {
 
   const onSubmit = async () => {
     setIsSubmitting(true);
+    // TODO - call server action to submit application
 
-    // Simulating the Server Action requirement
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-
-      // Redirect to confirmation with a mock GUID
       const guid = crypto.randomUUID();
       router.push(`/application/confirmation?id=${guid}`);
     } catch (error) {
@@ -36,7 +33,7 @@ export default function ReviewStep() {
         Review Your Application
       </h2>
 
-      {/* Displaying information in read-only format  */}
+      {/* display info (read-only format)  */}
       <section className="space-y-4">
         <div>
           <h3 className="font-semibold text-gray-700">Applicant</h3>
@@ -47,18 +44,110 @@ export default function ReviewStep() {
             {values.email} | {values.phone}
           </p>
         </div>
-
-        {/* Navigation back to specific steps allowed [cite: 95] */}
         <Button
           variant="secondary"
-          className="text-xs py-1 px-2"
+          size="small"
           onClick={() => router.push("/application/applicant")}
         >
           Edit Applicant Info
         </Button>
       </section>
 
-      {/* Add similar sections for Employment, Partner, Leave, and Payment  */}
+      <section className="space-y-4">
+        <div>
+          <h3 className="font-semibold text-gray-700">Employment</h3>
+          <p className="text-sm">{values.employmentType}</p>
+          {values.employmentType === EmploymentType.Employed && (
+            <>
+              <p className="text-sm">Employer: {values.employerName}</p>
+              <p className="text-sm">
+                Employment Ratio: {values.employmentRatio}%
+              </p>
+            </>
+          )}
+          {values.employmentType === EmploymentType.SelfEmployed && (
+            <p className="text-sm">Company: {values.companyName}</p>
+          )}
+        </div>
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={() => router.push("/application/employment")}
+        >
+          Edit Employment Info
+        </Button>
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <h3 className="font-semibold text-gray-700">Partner</h3>
+          <p className="text-sm">
+            {values.hasPartner
+              ? `${values.partnerFullName} (${values.partnerKennitala}) - ${values.partnerEmploymentStatus}`
+              : "No partner"}
+          </p>
+        </div>
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={() => router.push("/application/partner")}
+        >
+          Edit Partner Info
+        </Button>
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <h3 className="font-semibold text-gray-700">Leave Details</h3>
+          <p className="text-sm">
+            {new Date(values.startDate).toLocaleDateString()} to{" "}
+            {new Date(values.endDate).toLocaleDateString()} ({values.leaveRatio}
+            %)
+          </p>
+        </div>
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={() => router.push("/application/leave")}
+        >
+          Edit Leave Details
+        </Button>
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <h3 className="font-semibold text-gray-700">Payment Info</h3>
+          <p className="text-sm">
+            Bank: {values.bankNumber} | Ledger: {values.ledger} | Account:{" "}
+            {values.accountNumber}
+          </p>
+        </div>
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={() => router.push("/application/payment")}
+        >
+          Edit Payment Info
+        </Button>
+      </section>
+
+      <section className="space-y-4">
+        <div>
+          <h3 className="font-semibold text-gray-700">Documents</h3>
+          <ul className="list-disc list-inside text-sm">
+            {values.files.map((file, index) => (
+              <li key={index}>{file.name}</li>
+            ))}
+          </ul>
+        </div>
+        <Button
+          variant="secondary"
+          size="small"
+          onClick={() => router.push("/application/documents")}
+        >
+          Edit Documents
+        </Button>
+      </section>
 
       <div className="flex flex-col gap-4 pt-10 border-t">
         <Button onClick={onSubmit} disabled={isSubmitting}>
