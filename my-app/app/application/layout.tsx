@@ -68,7 +68,7 @@ export default function ApplicationLayout({
       ledger: "",
       accountNumber: "",
       // step 6: documents
-      file: null,
+      files: [],
     },
   });
 

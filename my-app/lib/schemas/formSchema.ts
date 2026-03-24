@@ -117,15 +117,15 @@ export const paymentSchema = z.object({
 // Step 6: Documents
 export const documentsSchema = z.object({
   files: z
-    .custom<FileList | null>()
-    .refine(
-      (files) => files && files.length > 0,
-      "At least one document is required",
+    .preprocess(
+      (val) => (val instanceof FileList ? Array.from(val) : val),
+      z.array(z.instanceof(File)),
     )
-    .transform((files) => (files ? Array.from(files) : []))
-    .refine((files) => {
-      return files.every((file) => file.size <= 25 * 1024 * 1024); // 25 MB = 25 * 1024 * 1024 bytes
-    }, "Maximum file size is 25 MB per file")
+    .refine((files) => files.length > 0, "At least one document is required")
+    .refine(
+      (files) => files.every((file) => file.size <= 25 * 1024 * 1024),
+      "Maximum file size is 25 MB per file",
+    )
     .refine((files) => {
       const acceptedTypes = ["application/pdf", "image/jpeg", "image/png"];
       return files.every((file) => acceptedTypes.includes(file.type));
