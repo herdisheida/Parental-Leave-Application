@@ -29,7 +29,7 @@ export default function ReviewStep() {
         if (key !== "files" && value !== undefined && value !== null) {
           // convert Dates or Booleans to str
           if (value instanceof Date) {
-            formData.append(key, value.toISOString());
+            formData.append(key, value.toLocaleDateString());
           } else {
             formData.append(key, String(value));
           }
@@ -37,11 +37,11 @@ export default function ReviewStep() {
       });
 
       // add files seperatly
-      if (values.files) {
-        Array.from(values.files).forEach((file) => {
-          formData.append("files", file);
-        });
-      }
+      // if (values.files) {
+      //   Array.from(values.files).forEach((file) => {
+      //     formData.append("files", file);
+      //   });
+      // }
 
       const result = await submitApplication(formData as FormData);
 
