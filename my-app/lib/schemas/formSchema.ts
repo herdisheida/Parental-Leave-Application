@@ -66,34 +66,13 @@ export const partnerSchema = z
   );
 
 // Step 4: Leave
-export const leaveSchema = z
-  .object({
-    startDate: z.date({ message: "Start date is required" }),
-    endDate: z.date({ message: "End date is required" }),
-    leaveRatio: z.enum(["25%", "50%", "75%", "100%"], {
-      message: "Please select a leave ratio",
-    }),
-  })
-  .superRefine((data, ctx) => {
-    if (data.endDate <= data.startDate) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "End date must be after the start date",
-        path: ["endDate"],
-      });
-    }
-
-    const diffInMonths =
-      (data.endDate.getTime() - data.startDate.getTime()) /
-      (1000 * 60 * 60 * 24 * 30.44);
-    if (diffInMonths > 12) {
-      ctx.addIssue({
-        code: z.ZodIssueCode.custom,
-        message: "Total leave duration cannot exceed 12 months",
-        path: ["endDate"],
-      });
-    }
-  });
+export const leaveSchema = z.object({
+  startDate: z.date("Start date is required"),
+  endDate: z.date("End date is required"),
+  leaveRatio: z.enum(["25%", "50%", "75%", "100%"], {
+    message: "Please select a leave ratio",
+  }),
+});
 
 // Step 5: Payment
 export const paymentSchema = z.object({
