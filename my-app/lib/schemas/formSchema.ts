@@ -146,7 +146,7 @@ export const paymentSchema = z.object({
 // Step 6: Documents
 export const documentsSchema = z.object({
   files: z
-    // handle both FileList and array of Files
+    // handle both FileList and array of Files for type safety
     .preprocess(
       (val) => (val instanceof FileList ? Array.from(val) : val),
       z.array(z.instanceof(File)),
