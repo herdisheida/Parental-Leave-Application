@@ -72,7 +72,7 @@ export default function EmploymentStep() {
             label="Employer Name"
             {...register("employerName")}
             error={errors.employerName?.message as string}
-            placeholder="Company Ltd."
+            placeholder="Company Inc."
           />
           <Input
             label="Employment Ratio (%)"
@@ -91,7 +91,7 @@ export default function EmploymentStep() {
             label="Company Name"
             {...register("companyName")}
             error={errors.companyName?.message as string}
-            placeholder="My Own Business"
+            placeholder="Pollyanna efh."
           />
         </div>
       )}

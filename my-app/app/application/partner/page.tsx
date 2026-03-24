@@ -51,13 +51,14 @@ export default function PartnerStep() {
             label="Partner Full Name"
             {...register("partnerFullName")}
             error={errors.partnerFullName?.message}
+            placeholder="Mima Mami"
           />
 
           <Input
             label="Partner Kennitala"
             {...register("partnerKennitala")}
             error={errors.partnerKennitala?.message}
-            placeholder="10 digits"
+            placeholder="000000000" // 10 digits
           />
 
           <Controller
