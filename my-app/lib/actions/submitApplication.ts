@@ -2,7 +2,7 @@
 
 import { MasterData } from "../schemas/formSchema";
 
-export async function submitApplication(formData: FormData) {
+export async function submitApplication(data: MasterData) {
   try {
     // simulate a processing (3 sec delay)
     await new Promise((resolve) => setTimeout(resolve, 3000));

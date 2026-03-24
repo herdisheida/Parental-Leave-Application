@@ -22,29 +22,7 @@ export default function ReviewStep() {
     setError(null);
 
     try {
-      const formData = new FormData();
-
-      // add all MasterData fields -> except files
-      Object.entries(values).forEach(([key, value]) => {
-        if (key !== "files" && value !== undefined && value !== null) {
-          // convert Dates or Booleans to str
-          if (value instanceof Date) {
-            formData.append(key, value.toLocaleDateString());
-          } else {
-            formData.append(key, String(value));
-          }
-        }
-      });
-
-      // add files seperatly
-      if (values.files && values.files.length > 0) {
-        const fileArray = Array.from(values.files); // if FileList -> convert to array
-        fileArray.forEach((file) => {
-          if (file instanceof File) formData.append("files", file);
-        });
-      }
-
-      const result = await submitApplication(formData as FormData);
+      const result = await submitApplication(values as MasterData);
 
       if (result.success) {
         router.push(`/application/confirmation?id=${result.confirmationId}`);
