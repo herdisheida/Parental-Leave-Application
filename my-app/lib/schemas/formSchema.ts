@@ -17,7 +17,11 @@ export const employmentSchema = z
       "Employment type is required",
     ),
     employerName: z.string().min(1, "Employer name is required").optional(),
-    employmentRatio: z.coerce.number().min(1).max(100).optional(),
+    employmentRatio: z.coerce
+      .number()
+      .min(1, "Employment ratio must be between 1-100")
+      .max(100, "Employment ratio must be between 1-100")
+      .optional(),
     companyName: z.string().min(1, "Company name is required").optional(),
   })
   .refine(
