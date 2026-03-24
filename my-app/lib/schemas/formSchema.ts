@@ -106,13 +106,16 @@ export const paymentSchema = z.object({
 
 // Step 6: Documents
 export const documentsSchema = z.object({
-  files: z.array(z.string()).min(1, "At least one document must be uploaded"),
-
-  // TODO this validation bullshit
-  // Accepted file types are: .pdf, .jpg, .png
-  // Maximum file size is 25 MB per file
-  // Multiple files can be uploaded
-  // The file name of each uploaded file should be displayed after selection
+  files: z
+    .array(z.any())
+    .min(1, "At least one document is required")
+    .refine((files) => {
+      return files.every((file: File) => file.size <= 25 * 1024 * 1024);
+    }, "Max file size is 25 MB per file")
+    .refine((files) => {
+      const acceptedTypes = ["application/pdf", "image/jpeg", "image/png"];
+      return files.every((file: File) => acceptedTypes.includes(file.type));
+    }, "Accepted formats are .pdf, .jpg, .png"),
 });
 
 // merge schemas for the entire form
