@@ -86,6 +86,7 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
+          size="small"
           onClick={() => router.push("/application/applicant")}
         >
           Edit
@@ -111,6 +112,7 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
+          size="small"
           onClick={() => router.push("/application/employment")}
         >
           Edit
@@ -129,6 +131,7 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
+          size="small"
           onClick={() => router.push("/application/partner")}
         >
           Edit
@@ -147,6 +150,7 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
+          size="small"
           onClick={() => router.push("/application/leave")}
         >
           Edit
@@ -164,6 +168,7 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
+          size="small"
           onClick={() => router.push("/application/payment")}
         >
           Edit
@@ -185,6 +190,7 @@ export default function ReviewStep() {
         </div>
         <Button
           variant="secondary"
+          size="small"
           onClick={() => router.push("/application/documents")}
         >
           Edit
