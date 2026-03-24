@@ -39,7 +39,7 @@ export default function ReviewStep() {
       </h2>
 
       {error && (
-        <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-md">
+        <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-md my-4">
           {error}
         </div>
       )}
