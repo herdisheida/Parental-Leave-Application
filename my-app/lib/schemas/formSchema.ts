@@ -146,6 +146,7 @@ export const paymentSchema = z.object({
 // Step 6: Documents
 export const documentsSchema = z.object({
   files: z
+    // handle FileList and convert to array for validation
     .preprocess(
       (val) => (val instanceof FileList ? Array.from(val) : val),
       z.array(z.instanceof(File)),

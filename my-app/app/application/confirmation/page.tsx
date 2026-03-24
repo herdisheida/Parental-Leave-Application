@@ -1,4 +1,5 @@
 // app/application/confirmation/page.tsx
+"use client";
 
 import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/Button";
