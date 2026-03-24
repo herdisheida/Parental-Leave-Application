@@ -2,27 +2,32 @@
 
 "use client";
 
+import { submitApplication } from "@/lib/actions/submitApplication";
 import { EmploymentType, type MasterData } from "@/lib/schemas/formSchema";
 import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/Button";
 import { useState } from "react";
+import { Button } from "@/components/ui/Button";
 
 export default function ReviewStep() {
   const router = useRouter();
   const { getValues } = useFormContext<MasterData>();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   const values = getValues();
 
   const onSubmit = async () => {
     setIsSubmitting(true);
-    // TODO - call server action to submit application
+    setError(null);
 
-    try {
-      const guid = crypto.randomUUID();
-      router.push(`/application/confirmation?id=${guid}`);
-    } catch (error) {
-      alert("Submission failed. Please try again.");
+    const result = await submitApplication(values);
+
+    if (result.success) {
+      router.push(`/application/confirmation?id=${result.confirmationId}`);
+    } else {
+      // display failure msg - don't lose data form
+      setError(result.message || "Failed to submit.");
       setIsSubmitting(false);
     }
   };
@@ -157,7 +162,3 @@ export default function ReviewStep() {
     </div>
   );
 }
-
-// TODO
-// On failure, an error message should be displayed on the review page
-// without losing the form data
