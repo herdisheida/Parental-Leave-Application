@@ -146,8 +146,8 @@ export default function ReviewStep() {
         <div className="text-sm space-y-1">
           <h3 className="font-bold text-gray-900">Documents</h3>
           <ul className="list-disc list-inside text-sm">
-            {values.files.length > 0 ? (
-              values.files.map((file, index) => (
+            {values.files && values.files.length > 0 ? (
+              Array.from(values.files).map((file: any, index: number) => (
                 <li key={index}>{file.name}</li>
               ))
             ) : (
