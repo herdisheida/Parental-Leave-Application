@@ -89,8 +89,8 @@ export const partnerSchema = z
 // Step 4: Leave
 export const leaveSchema = z
   .object({
-    startDate: z.date("Start date is required"),
-    endDate: z.date("End date is required"),
+    startDate: z.date({ message: "Start date is required" }),
+    endDate: z.date({ message: "End date is required" }),
     leaveRatio: z.enum(
       [
         LeaveRatio["25%"],
