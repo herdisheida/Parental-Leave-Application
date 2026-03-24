@@ -1,5 +1,17 @@
 import { z } from "zod";
 
+export enum EmploymentType {
+  Employed = "Employed",
+  SelfEmployed = "Self-employed",
+  Unemployed = "Unemployed",
+}
+export enum LeaveRatio {
+  "25%" = "25%",
+  "50%" = "50%",
+  "75%" = "75%",
+  "100%" = "100%",
+}
+
 // Step 1 : Applicant
 export const applicantSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
@@ -13,7 +25,11 @@ export const applicantSchema = z.object({
 export const employmentSchema = z
   .object({
     employmentType: z.enum(
-      ["Employed", "Self-employed", "Unemployed"],
+      [
+        EmploymentType.Employed,
+        EmploymentType.SelfEmployed,
+        EmploymentType.Unemployed,
+      ],
       "Employment type is required",
     ),
     employerName: z.string().min(1, "Employer name is required").optional(),
@@ -26,9 +42,10 @@ export const employmentSchema = z
   })
   .refine(
     (data) => {
-      if (data.employmentType === "Employed")
+      if (data.employmentType === EmploymentType.Employed)
         return !!data.employerName && !!data.employmentRatio;
-      if (data.employmentType === "Self-employed") return !!data.companyName;
+      if (data.employmentType === EmploymentType.SelfEmployed)
+        return !!data.companyName;
       return true;
     },
     { message: "Required fields for employment type are missing" },
@@ -47,7 +64,11 @@ export const partnerSchema = z
       .regex(/^\d{10}$/, "Kennitala must be 10 digits")
       .optional(),
     partnerEmploymentStatus: z.enum(
-      ["Employed", "Self-employed", "Unemployed"],
+      [
+        EmploymentType.Employed,
+        EmploymentType.SelfEmployed,
+        EmploymentType.Unemployed,
+      ],
       "Partner's employment status is required",
     ),
   })
@@ -70,9 +91,17 @@ export const leaveSchema = z
   .object({
     startDate: z.date("Start date is required"),
     endDate: z.date("End date is required"),
-    leaveRatio: z.enum(["25%", "50%", "75%", "100%"], {
-      message: "Please select a leave ratio",
-    }),
+    leaveRatio: z.enum(
+      [
+        LeaveRatio["25%"],
+        LeaveRatio["50%"],
+        LeaveRatio["75%"],
+        LeaveRatio["100%"],
+      ],
+      {
+        message: "Please select a leave ratio",
+      },
+    ),
   })
   .superRefine((data, ctx) => {
     if (data.startDate && data.endDate) {

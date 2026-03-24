@@ -1,7 +1,7 @@
 // app/application/partner/page.tsx
 "use client";
 
-import { type MasterData } from "@/lib/schemas/formSchema";
+import { EmploymentType, type MasterData } from "@/lib/schemas/formSchema";
 import { useFormContext, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/Checkbox";
@@ -20,7 +20,7 @@ export default function PartnerStep() {
   } = useFormContext<MasterData>();
 
   // watch the checkbox status
-  const hasPartner = watch("hasPartner");
+  const hasPartner = watch("hasPartner") as boolean;
 
   const onNext = async () => {
     const fieldsToValidate: (keyof MasterData)[] = ["hasPartner"];
@@ -68,9 +68,12 @@ export default function PartnerStep() {
               <RadioButton
                 label="Partner Employment Status"
                 options={[
-                  { label: "Employed", value: "Employed" },
-                  { label: "Self-employed", value: "Self-employed" },
-                  { label: "Unemployed", value: "Unemployed" },
+                  { label: "Employed", value: EmploymentType.Employed },
+                  {
+                    label: "Self-employed",
+                    value: EmploymentType.SelfEmployed,
+                  },
+                  { label: "Unemployed", value: EmploymentType.Unemployed },
                 ]}
                 error={errors.partnerEmploymentStatus?.message}
                 {...field}

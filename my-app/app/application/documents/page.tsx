@@ -17,7 +17,7 @@ export default function DocumentsStep() {
   } = useFormContext<MasterData>();
 
   // watch files to display file name
-  const selectedFiles = watch("files");
+  const selectedFiles = watch("files") as File[] | undefined;
 
   const onNext = async () => {
     const isValid = await trigger(["files"]);

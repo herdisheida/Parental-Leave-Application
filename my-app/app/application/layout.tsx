@@ -6,7 +6,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { useForm, FormProvider, type Resolver } from "react-hook-form";
 import { StepIndicator } from "@/components/ui/StepIndicator";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { masterSchema, type MasterData } from "@/lib/schemas/formSchema";
+import {
+  EmploymentType,
+  LeaveRatio,
+  masterSchema,
+  type MasterData,
+} from "@/lib/schemas/formSchema";
 
 // step titles of the application process
 const STEPS = [
@@ -50,7 +55,7 @@ export default function ApplicationLayout({
       email: "",
       phone: "",
       // step 2: employment
-      employmentType: "Unemployed",
+      employmentType: EmploymentType.Unemployed,
       employerName: "",
       employmentRatio: undefined,
       companyName: "",
@@ -58,11 +63,11 @@ export default function ApplicationLayout({
       hasPartner: false,
       partnerFullName: "",
       partnerKennitala: "",
-      partnerEmploymentStatus: "Unemployed",
+      partnerEmploymentStatus: EmploymentType.Unemployed,
       // step 4: leave
       startDate: undefined,
       endDate: undefined,
-      leaveRatio: "100%",
+      leaveRatio: LeaveRatio["100%"],
       // step 5: payment
       bankNumber: "",
       ledger: "",
@@ -73,7 +78,7 @@ export default function ApplicationLayout({
   });
 
   const { watch } = methods;
-  const currentFullName = watch("fullName");
+  const currentFullName = watch("fullName") as string;
 
   // Session Handling: Detect hard refresh
   useEffect(() => {

@@ -1,7 +1,7 @@
 // app/application/employment/page.tsx
 "use client";
 
-import { type MasterData } from "@/lib/schemas/formSchema";
+import { EmploymentType, type MasterData } from "@/lib/schemas/formSchema";
 import { useFormContext, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { RadioButton } from "@/components/ui/RadioButton";
@@ -55,9 +55,9 @@ export default function EmploymentStep() {
           <RadioButton
             label="What is your employment status?"
             options={[
-              { label: "Employed", value: "Employed" },
-              { label: "Self-employed", value: "Self-employed" },
-              { label: "Unemployed", value: "Unemployed" },
+              { label: "Employed", value: EmploymentType.Employed },
+              { label: "Self-employed", value: EmploymentType.SelfEmployed },
+              { label: "Unemployed", value: EmploymentType.Unemployed },
             ]}
             error={errors.employmentType?.message as string}
             {...field}
