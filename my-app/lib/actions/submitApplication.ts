@@ -8,7 +8,7 @@ export async function submitApplication(formData: FormData) {
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
     // mock random failure  ( 10 % chance )
-    if (Math.random() > 0.9) throw new Error("Database connection failed");
+    // if (Math.random() > 0.9) throw new Error("Database connection failed");
 
     // return success with a GUID confirmation number
     return {
