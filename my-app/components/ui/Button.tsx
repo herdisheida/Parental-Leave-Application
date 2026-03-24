@@ -19,9 +19,9 @@ export const Button = ({
       "bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-gray-400",
   };
   const sizes = {
-    small: "text-sm",
-    medium: "text-base",
-    large: "text-lg",
+    small: "px-3 py-1 text-xs",
+    medium: "px-6 py-2 text-base",
+    large: "px-8 py-3 text-lg",
   };
 
   return (
