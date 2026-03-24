@@ -2,7 +2,7 @@
 
 "use client";
 
-import { type MasterData } from "@/lib/schemas/formSchema";
+import { type MasterData, leaveSchema } from "@/lib/schemas/formSchema";
 import { useFormContext, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { Select } from "@/components/ui/Select";
@@ -14,17 +14,32 @@ export default function LeaveStep() {
   const {
     control,
     trigger,
+    getValues,
+    setError,
     formState: { errors },
   } = useFormContext<MasterData>();
 
   const onNext = async () => {
-    const fieldsToValidate: (keyof MasterData)[] = [
-      "startDate",
-      "endDate",
-      "leaveRatio",
-    ];
+    const currentValues = {
+      startDate: getValues("startDate" as keyof MasterData),
+      endDate: getValues("endDate" as keyof MasterData),
+      leaveRatio: getValues("leaveRatio" as keyof MasterData),
+    };
 
-    const isValid = await trigger(fieldsToValidate);
+    // manually set errors
+    const result = leaveSchema.safeParse(currentValues);
+    if (!result.success) {
+      result.error.issues.forEach((issue) => {
+        setError(issue.path[0] as keyof MasterData, {
+          type: "manual",
+          message: issue.message,
+        });
+      });
+      return; // stop navigation
+    }
+
+    // also trigger masterSchema to keep React-Hook-Form in sync
+    const isValid = await trigger(["startDate", "endDate", "leaveRatio"]);
     if (isValid) router.push("/application/payment");
   };
 
