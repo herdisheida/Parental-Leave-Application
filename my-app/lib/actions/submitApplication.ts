@@ -1,6 +1,8 @@
 "use server";
 
-export async function submitApplication(data: any) {
+import { MasterData } from "../schemas/formSchema";
+
+export async function submitApplication(data: MasterData) {
   try {
     // simulate a processing delay of 3 seconds
     await new Promise((resolve) => setTimeout(resolve, 3000));

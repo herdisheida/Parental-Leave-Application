@@ -21,14 +21,20 @@ export default function ReviewStep() {
     setIsSubmitting(true);
     setError(null);
 
-    const result = await submitApplication(values);
+    try {
+      const result = await submitApplication(values);
 
-    if (result.success) {
-      router.push(`/application/confirmation?id=${result.confirmationId}`);
-    } else {
-      // display failure msg - don't lose data form
-      setError(result.message || "Failed to submit.");
+      if (result.success) {
+        router.push(`/application/confirmation?id=${result.confirmationId}`);
+      } else {
+        // display failure msg - don't lose data form
+        setError(result.message || "Failed to submit.");
+        setIsSubmitting(false);
+      }
+    } catch (err) {
+      setError("An unexpected error occurred. Please try again.");
       setIsSubmitting(false);
+      console.error(err);
     }
   };
 
