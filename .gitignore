@@ -692,3 +692,4 @@ node_modules/zod/index.js
 node_modules/zod/index.d.ts
 node_modules/zod/index.d.cts
 node_modules/zod/index.cjs
+.DS_Store
