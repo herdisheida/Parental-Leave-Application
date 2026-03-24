@@ -22,6 +22,7 @@ export async function submitApplication(formData: FormData) {
       confirmationId: crypto.randomUUID(),
     };
   } catch (error) {
+    console.error("Error submitting application:", error);
     return {
       success: false,
       message: "An error occurred while submitting. Please try again.",
