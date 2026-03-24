@@ -37,11 +37,12 @@ export default function ReviewStep() {
       });
 
       // add files seperatly
-      // if (values.files) {
-      //   Array.from(values.files).forEach((file) => {
-      //     formData.append("files", file);
-      //   });
-      // }
+      if (values.files && values.files.length > 0) {
+        const fileArray = Array.from(values.files); // if FileList -> convert to array
+        fileArray.forEach((file) => {
+          if (file instanceof File) formData.append("files", file);
+        });
+      }
 
       const result = await submitApplication(formData as FormData);
 
