@@ -12,7 +12,10 @@ export const applicantSchema = z.object({
 // Step 2: Employment
 export const employmentSchema = z
   .object({
-    employmentType: z.enum(["Employed", "Self-employed", "Unemployed"]),
+    employmentType: z.enum(
+      ["Employed", "Self-employed", "Unemployed"],
+      "Employment type is required",
+    ),
     employerName: z.string().min(1, "Employer name is required").optional(),
     employmentRatio: z.coerce.number().min(1).max(100).optional(),
     companyName: z.string().min(1, "Company name is required").optional(),
@@ -39,11 +42,10 @@ export const partnerSchema = z
       .string()
       .regex(/^\d{10}$/, "Kennitala must be 10 digits")
       .optional(),
-    partnerEmploymentStatus: z.enum([
-      "Employed",
-      "Self-employed",
-      "Unemployed",
-    ]),
+    partnerEmploymentStatus: z.enum(
+      ["Employed", "Self-employed", "Unemployed"],
+      "Partner's employment status is required",
+    ),
   })
   .refine(
     (data) => {
@@ -60,11 +62,30 @@ export const partnerSchema = z
   );
 
 // Step 4: Leave
-export const leaveSchema = z.object({
-  leaveStart: z.string().min(1, "Leave start date is required"),
-  leaveEnd: z.string().min(1, "Leave end date is required"),
-  // TODO - add validation to ensure end date is after start date + max 12 months + leave ratio
-});
+export const leaveSchema = z
+  .object({
+    startDate: z.date({ required_error: "Start date is required" }),
+    endDate: z.date({ required_error: "End date is required" }),
+    leaveRatio: z.enum(["25%", "50%", "75%", "100%"], {
+      required_error: "Please select a leave ratio",
+    }),
+  })
+  .refine((data) => data.endDate > data.startDate, {
+    message: "End date must be after the start date",
+    path: ["endDate"],
+  })
+  .refine(
+    (data) => {
+      const diffInMonths =
+        (data.endDate.getTime() - data.startDate.getTime()) /
+        (1000 * 60 * 60 * 24 * 30.44);
+      return diffInMonths <= 12;
+    },
+    {
+      message: "Total leave duration cannot exceed 12 months",
+      path: ["endDate"],
+    },
+  );
 
 // Step 5: Payment
 export const paymentSchema = z.object({
