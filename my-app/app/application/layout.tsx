@@ -62,13 +62,13 @@ export default function ApplicationLayout({
       // step 4: leave
       startDate: undefined,
       endDate: undefined,
-      leaveRatio: undefined,
+      leaveRatio: "100%",
       // step 5: payment
       bankNumber: "",
       ledger: "",
       accountNumber: "",
       // step 6: documents
-      files: [],
+      file: null,
     },
   });
 

@@ -12,10 +12,14 @@ export default function DocumentsStep() {
   const {
     register,
     trigger,
+    watch,
     formState: { errors },
   } = useFormContext<MasterData>();
 
-  const handleNext = async () => {
+  // watch files to display file name
+  const selectedFiles = watch("files");
+
+  const onNext = async () => {
     const isValid = await trigger(["files"]);
     if (isValid) router.push("/application/review");
   };
@@ -25,7 +29,7 @@ export default function DocumentsStep() {
       <div className="border-b pb-4">
         <h2 className="text-xl font-bold">Step 6: Documents</h2>
         <p className="text-sm text-gray-500">
-          Upload your supporting documents.
+          Please upload at least one supporting document (.pdf, .jpg, .png)
         </p>
       </div>
 
@@ -37,11 +41,25 @@ export default function DocumentsStep() {
         error={errors.files?.message as string}
       />
 
+      {/* display file names after selection  */}
+      {selectedFiles && selectedFiles.length > 0 && (
+        <div className="mt-4 p-4 bg-blue-50 rounded-md border border-blue-100">
+          <p className="text-sm font-semibold text-blue-900 mb-2">
+            Selected Files:
+          </p>
+          <ul className="text-sm text-blue-800 list-disc pl-5">
+            {Array.from(selectedFiles).map((file, index) => (
+              <li key={index}>{file.name}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
       <div className="flex justify-between pt-6">
         <Button type="button" variant="secondary" onClick={() => router.back()}>
           Back
         </Button>
-        <Button type="button" onClick={handleNext}>
+        <Button type="button" onClick={onNext}>
           Next Step
         </Button>
       </div>
