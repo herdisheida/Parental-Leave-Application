@@ -121,8 +121,8 @@ export default function ReviewStep() {
         <div className="text-sm space-y-1">
           <h3 className="font-bold text-gray-900">Leave Period</h3>
           <p>
-            Dates: {values.startDate?.toLocaleDateString()} to{" "}
-            {values.endDate?.toLocaleDateString()}
+            Dates: {values.startDate?.toLocaleDateString("en-GB")} to{" "}
+            {values.endDate?.toLocaleDateString("en-GB")}
           </p>
           <p>Ratio: {values.leaveRatio}</p>
         </div>
